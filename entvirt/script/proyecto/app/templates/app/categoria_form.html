@@ -1,0 +1,16 @@
+{% extends 'base/index.html' %}
+
+{% block contenido %}
+<br>
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Agregar Categoria</div>
+    <div class="card-body">
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</div>
+
+</div>
+{% endblock %}

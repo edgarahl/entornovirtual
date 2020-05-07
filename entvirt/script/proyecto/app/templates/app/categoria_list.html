@@ -1,0 +1,26 @@
+{% extends 'base/index.html' %}
+
+{% block contenido %}
+<br>
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Listado de Categorias <a href="{% url 'app:categoria_nueva' %}" class="btn btn-primary">Nueva</a></div>
+    <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+              <th>Id</th>
+              <th>Descripcion</th>
+          </thead>
+          <tbody>
+            {% for item in obj %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.descripcion }}</td>             
+        </tr>
+        {% endfor %}        
+          </tbody>
+      </table>
+    </div>
+  </div>
+  
+  </div>
+{% endblock %}
