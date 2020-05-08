@@ -5,12 +5,13 @@
 <div class="card border-primary mb-3" style="max-width: 20rem;">
     <div class="card-header">Agregar Categoria</div>
     <div class="card-body">
-        <form method="post">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save">
-        </form>
+      <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success" >Save</button>
+        <a href="{% url 'app:categoria_listar' %}" class="btn btn-primary">Cancelar</a>
+    </form>
     </div>
-</div>
-
-</div>
+  </div>
+  
+  </div>
 {% endblock %}
