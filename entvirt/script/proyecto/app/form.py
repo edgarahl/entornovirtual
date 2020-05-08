@@ -1,9 +1,16 @@
-from django.forms import ModelForm
+from django import forms
+from .models import Categoria, SubCategoria
 
-from .models import Categoria
-
-
-class CategoriaForm(ModelForm):
+class CategoriaForm(forms.ModelForm):
     class Meta:
-        model = Categoria
-        fields = ['descripcion']
+        model=Categoria
+        fields=['descripcion']
+        labels={'descripcion':'Descripcion'}
+
+class SubCategoriaForm(forms.ModelForm):
+    class Meta:
+        model=SubCategoria
+        fields=['categoria','descripcion']
+        labels={'categoria':'Categorias',
+            'descripcion':'Descripcion'
+            }
