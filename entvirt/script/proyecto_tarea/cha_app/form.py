@@ -29,7 +29,7 @@ class AseguradoForm(forms.ModelForm):
         fields = ['nombres', 'apellidos','direccion', 'fecha_nacimiento', 'estado']
         lables = {'nombres': 'Nombre', 'apellidos': 'Apellidos','fecha_nacimiento':'Fecha Nacimiento','estado':'Estado'}
         widgets = {
-            'fecha_nacimiento': forms.DateInput(format=('%m/%d/%Y'),
+            'fecha_nacimiento': forms.DateInput(format=('%Y-%m-%d'),
                                              attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
                                                     'type': 'date'}),
         }
