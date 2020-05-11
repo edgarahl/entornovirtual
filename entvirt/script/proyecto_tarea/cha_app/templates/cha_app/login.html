@@ -1,6 +1,7 @@
 {% extends 'base/index.html' %}
-{% block login %}
-{% endblock %}
+{% load static %}
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'base/css/login.css' %}">
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -16,3 +17,4 @@
         </div>
     </div>
 </div>
+{% endblock %}
