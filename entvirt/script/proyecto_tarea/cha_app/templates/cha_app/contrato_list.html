@@ -1,0 +1,39 @@
+{% extends 'base/index.html' %}
+
+{% block contenido %}
+<br>
+<div class="card border-primary mb-3" style="max-width: 30rem;">
+    <div class="card-header">Listado de Contratos de Poliza</div>
+    <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+              <th>Id</th>
+              <th>Asegurado</th>
+              <th>Fecha de Contrato</th>
+              <th>Fecha Inicial</th>
+              <th>Fecha Final</th>
+          </thead>
+          <tbody>
+            {% for item in obj %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.descripcion }}</td>
+                <td>{{ item.id_asegurado }}</td>
+                <td>{{ item.fecha_contrato }}</td>
+                <td>{{ item.fecha_inicio }}</td>
+                <td>{{ item.fecha_fin }}</td>
+                <td>{{ item.estado }}</td>
+                <td>
+
+                </td>
+        </tr>
+        {% endfor %}        
+          </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'cha_app:contrato_nuevo' %}" class="btn btn-primary">Nuevo Contrato</a>
+  </div>
+  
+  </div>
+{% endblock %}
