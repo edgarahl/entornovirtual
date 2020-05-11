@@ -46,7 +46,7 @@ class Asegurado(models.Model):
     fecha_nacimiento = models.DateField(null=False, blank=False)
 
     def __str__(self):
-        return "{}{}".format(self.nombres, self.apellidos)
+        return "{}{}{}".format(self.nombres, self.apellidos, self.fecha_nacimiento)
 
     def save(self):
         self.nombres = self.nombres.upper()
