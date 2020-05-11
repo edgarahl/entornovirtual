@@ -1,0 +1,17 @@
+{% extends 'base/index.html' %}
+
+{% block contenido %}
+<br>
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Agregar Poliza</div>
+    <div class="card-body">
+      <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success" >Save</button>
+        <a href="{% url 'cha_app:poliza_listar' %}" class="btn btn-primary">Cancelar</a>
+    </form>
+    </div>
+  </div>
+  
+  </div>
+{% endblock %}

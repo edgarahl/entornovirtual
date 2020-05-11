@@ -15,11 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import VendedorListar
-
-app_name = 'cha_app'
-
+from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar, PolizaListar, PolizaNueva \
+    , HospitalListar, HospitalNuevo, HospitalEditar, HospitalBorrar, AseguradoNuevo, AseguradoEditar, AseguradoBorrar,\
+    AseguradoListar, PolizaEditar, PolizaBorrar
 
 urlpatterns = [
-    path("vendedores/", VendedorListar.as_view(), name="vendedor_lista"),
+    path("vendedores/", VendedorListar.as_view(), name="vendedor_listar"),
+    path("vendedores/nuevo/", VendedorNueva.as_view(), name="vendedor_nuevo"),
+    path("vendedores/editar/<int:pk>", VendedorEditar.as_view(), name="vendedor_editar"),
+    path("vendedores/borrar/<int:pk>",VendedorBorrar.as_view(),name="vendedor_borrar"),
+    path("polizas/", PolizaListar.as_view(), name="poliza_listar"),
+    path("polizas/nuevo/", PolizaNueva.as_view(), name="poliza_nuevo"),
+    path("polizas/editar/<int:pk>", PolizaEditar.as_view(), name="poliza_editar"),
+    path("polizas/borrar/<int:pk>", PolizaBorrar.as_view(), name="poliza_borrar"),
+    path("hospitales/", HospitalListar.as_view(), name="hospital_listar"),
+    path("hospitales/nuevo/", HospitalNuevo.as_view(), name="hospital_nuevo"),
+    path("hospitales/editar/<int:pk>", HospitalEditar.as_view(), name="hospital_editar"),
+    path("hospitales/borrar/<int:pk>", HospitalBorrar.as_view(), name="hospital_borrar"),
+    path("asegurados/nuevo/", AseguradoNuevo.as_view(), name="asegurado_nuevo"),
+    path("asegurados/editar/<int:pk>", AseguradoEditar.as_view(), name="asegurado_editar"),
+    path("asegurados/borrar/<int:pk>", AseguradoBorrar.as_view(), name="asegurado_borrar"),
+    path("asegurados/", AseguradoListar.as_view(), name="asegurado_listar"),
 ]
