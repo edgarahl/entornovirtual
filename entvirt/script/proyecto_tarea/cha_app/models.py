@@ -77,3 +77,13 @@ class Hospital(models.Model):
         null=False
     )
     estado = models.BooleanField(default=True)
+
+
+class ContratoPoliza(models.Model):
+    id_poliza = models.ForeignKey('Poliza', on_delete=models.DO_NOTHING)
+    id_vendedor = models.ForeignKey('Vendedor', on_delete=models.DO_NOTHING)
+    id_asegurado = models.ForeignKey('Asegurado', on_delete=models.DO_NOTHING)
+    fecha_contrato = models.DateField(null=False, blank=False)
+    fecha_inicio = models.DateField(null=False, blank=False)
+    fecha_fin = models.DateField(null=False, blank=False)
+    estado = models.BooleanField(default=True)

@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
-from .models import Vendedor, Poliza, Asegurado, Hospital
+from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza
 from django.urls import reverse_lazy
-from .form import VendedorForm, PolizaForm, HospitalForm, AseguradoForm
+from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm
 
 
 # Asi tambien se puede importar la categoria
@@ -137,3 +137,11 @@ class HospitalBorrar(generic.DeleteView):
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = HospitalForm
     success_url = reverse_lazy('cha_app:hospital_listar')
+
+
+class ContratoPoliza(generic.CreateView):
+    model = ContratoPoliza
+    template_name = 'cha_app/contrato_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = ContratoPolizaForm
+    success_url = reverse_lazy('cha_app:contrato_listar')

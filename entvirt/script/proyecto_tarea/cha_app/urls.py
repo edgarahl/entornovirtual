@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar, PolizaListar, PolizaNueva \
     , HospitalListar, HospitalNuevo, HospitalEditar, HospitalBorrar, AseguradoNuevo, AseguradoEditar, AseguradoBorrar,\
-    AseguradoListar, PolizaEditar, PolizaBorrar, index
+    AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza
 
 urlpatterns = [
     path("vendedores/", VendedorListar.as_view(), name="vendedor_listar"),
@@ -38,6 +38,7 @@ urlpatterns = [
     path("asegurados/borrar/<int:pk>", AseguradoBorrar.as_view(), name="asegurado_borrar"),
     path("asegurados/", AseguradoListar.as_view(), name="asegurado_listar"),
     url(r'^$', index, name='index'),
+    path("contrato-polizas/nuevo/", ContratoPoliza.as_view(), name="contrato_nuevo"),
 
 
 ]
