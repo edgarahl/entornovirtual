@@ -2,16 +2,17 @@
 
 {% block contenido %}
 <br>
+<form method="post">{% csrf_token %}
 <div class="card border-primary mb-3" style="max-width: 20rem;">
     <div class="card-header">Agregar Hospital</div>
     <div class="card-body">
-      <form method="post">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success" >Save</button>
-        <a href="{% url 'cha_app:hospital_listar' %}" class="btn btn-primary">Cancelar</a>
-    </form>
     </div>
-  </div>
-  
-  </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-success" >Guardar</button>
+        <a href="{% url 'cha_app:hospital_listar' %}" class="btn btn-primary">Cancelar</a>
+    </div>
+ </div>
+</form>
+
 {% endblock %}
