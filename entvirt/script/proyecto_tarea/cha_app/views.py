@@ -11,6 +11,13 @@ from .form import VendedorForm, PolizaForm, HospitalForm, AseguradoForm
 
 # Create your views here.
 
+def index(request):
+    # Renderiza la plantilla HTML index.html con los datos en la variable contexto
+    return render(
+        request,
+        'cha_app/login.html'
+    )
+
 class VendedorListar(generic.ListView):
     model = Vendedor
     template_name = 'cha_app/vendedor_list.html'
