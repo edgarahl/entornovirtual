@@ -6,30 +6,54 @@
     <div class="card-header">Listado de Vendedores</div>
     <div class="card-body">
         <table class="table table-hover">
-          <thead>
-              <th>Id</th>
-              <th>Nombres</th>
-              <th>Apellidos</th>
-              <th>Accion</th>              
-          </thead>
-          <tbody>
+            <thead>
+            <th>Id</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Accion</th>
+            </thead>
+            <tbody>
             {% for item in obj %}
             <tr>
                 <td>{{ item.id }}</td>
                 <td>{{ item.nombres }}</td>
                 <td>{{ item.apellidos }}</td>
-                <td><a href="{% url 'cha_app:vendedor_editar' item.id %}" class="btn btn-warning"><i class='far fa-edit'></i></a>
-                    <a href="{% url 'cha_app:vendedor_borrar' item.id %}" class="btn btn-danger"><i class='fa fa-minus-circle'></i></a>
+                <td><a href="{% url 'cha_app:vendedor_editar' item.id %}" class="btn btn-warning"><i
+                        class='far fa-edit'></i></a>
+                    <a href="{% url 'cha_app:vendedor_borrar' item.id %}" class="btn btn-danger"><i
+                            class='fa fa-minus-circle'></i></a>
                 </td>
-        </tr>
-        {% endfor %}        
-          </tbody>
-      </table>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li  class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
     </div>
     <div class="card-footer">
-         <a href="{% url 'cha_app:vendedor_nuevo' %}" class="btn btn-primary"><i class='fa fa-plus-circle'></i>&nbsp;Nueva</a>
+        <a href="{% url 'cha_app:vendedor_nuevo' %}" class="btn btn-primary"><i class='fa fa-plus-circle'></i>&nbsp;Nueva</a>
     </div>
-  </div>
-  
-  </div>
+</div>
+
+</div>
 {% endblock %}
