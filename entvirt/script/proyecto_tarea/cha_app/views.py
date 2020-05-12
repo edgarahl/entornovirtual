@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.views import generic
 from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos
@@ -23,7 +24,9 @@ class VendedorListar(generic.ListView):
     model = Vendedor
     template_name = 'cha_app/vendedor_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    context = [Paginator]
     ordering = "nombres"
+    paginate_by = 5
 
 
 class VendedorNueva(generic.CreateView):
