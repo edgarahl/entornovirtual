@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
-from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza
+from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos
 from django.urls import reverse_lazy
 from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm
 
@@ -17,6 +17,7 @@ def index(request):
         request,
         'cha_app/login.html'
     )
+
 
 class VendedorListar(generic.ListView):
     model = Vendedor
@@ -97,7 +98,7 @@ class PolizaEditar(generic.UpdateView):
     model = Poliza
     template_name = 'cha_app/poliza_form.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
-    form_class =PolizaForm
+    form_class = PolizaForm
     success_url = reverse_lazy('cha_app:poliza_listar')
 
 
@@ -140,8 +141,14 @@ class HospitalBorrar(generic.DeleteView):
 
 
 class ContratoPoliza(generic.CreateView):
-    model = ContratoPoliza
+    model = Contratos
     template_name = 'cha_app/contrato_form.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = ContratoPolizaForm
     success_url = reverse_lazy('cha_app:contrato_listar')
+
+
+class ContratoPolizaListar(generic.ListView):
+    model = Contratos
+    template_name = 'cha_app/contrato_list.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta

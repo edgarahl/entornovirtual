@@ -46,7 +46,7 @@ class Asegurado(models.Model):
     fecha_nacimiento = models.DateField(null=False, blank=False)
 
     def __str__(self):
-        return "{}{}{}".format(self.nombres, self.apellidos, self.fecha_nacimiento)
+        return "{} {}".format(self.nombres, self.apellidos)
 
     def save(self):
         self.nombres = self.nombres.upper()
@@ -64,6 +64,9 @@ class Poliza(models.Model):
     costo_extension = models.FloatField(default=0)
     valor_cobertura = models.FloatField(default=0)
 
+    def __str__(self):
+        return "{} ".format(self.descripcion)
+
 
 class Hospital(models.Model):
     descripcion = models.CharField(
@@ -80,10 +83,17 @@ class Hospital(models.Model):
 
 
 class ContratoPoliza(models.Model):
-    id_poliza = models.ForeignKey('Poliza', on_delete=models.DO_NOTHING)
-    id_vendedor = models.ForeignKey('Vendedor', on_delete=models.DO_NOTHING)
-    id_asegurado = models.ForeignKey('Asegurado', on_delete=models.DO_NOTHING)
+    id_poliza = models.ForeignKey('Poliza', on_delete=models.CASCADE, null=False)
+    id_vendedor = models.ForeignKey('Vendedor', on_delete=models.CASCADE, null=False)
+    id_asegurado = models.ForeignKey('Asegurado',on_delete=models.CASCADE, null=False)
     fecha_contrato = models.DateField(null=False, blank=False)
     fecha_inicio = models.DateField(null=False, blank=False)
     fecha_fin = models.DateField(null=False, blank=False)
     estado = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["id_poliza"]
+        verbose_name_plural = "Contratos"
+
+    def __str__(self):
+        return "{} ".format(self.id_poliza)

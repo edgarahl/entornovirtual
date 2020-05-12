@@ -17,14 +17,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar, PolizaListar, PolizaNueva \
-    , HospitalListar, HospitalNuevo, HospitalEditar, HospitalBorrar, AseguradoNuevo, AseguradoEditar, AseguradoBorrar,\
-    AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza
+    , HospitalListar, HospitalNuevo, HospitalEditar, HospitalBorrar, AseguradoNuevo, AseguradoEditar, AseguradoBorrar, \
+    AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza, ContratoPolizaListar
 
 urlpatterns = [
     path("vendedores/", VendedorListar.as_view(), name="vendedor_listar"),
     path("vendedores/nuevo/", VendedorNueva.as_view(), name="vendedor_nuevo"),
     path("vendedores/editar/<int:pk>", VendedorEditar.as_view(), name="vendedor_editar"),
-    path("vendedores/borrar/<int:pk>",VendedorBorrar.as_view(),name="vendedor_borrar"),
+    path("vendedores/borrar/<int:pk>", VendedorBorrar.as_view(), name="vendedor_borrar"),
     path("polizas/", PolizaListar.as_view(), name="poliza_listar"),
     path("polizas/nuevo/", PolizaNueva.as_view(), name="poliza_nuevo"),
     path("polizas/editar/<int:pk>", PolizaEditar.as_view(), name="poliza_editar"),
@@ -38,7 +38,6 @@ urlpatterns = [
     path("asegurados/borrar/<int:pk>", AseguradoBorrar.as_view(), name="asegurado_borrar"),
     path("asegurados/", AseguradoListar.as_view(), name="asegurado_listar"),
     url(r'^$', index, name='index'),
-    path("contrato-polizas/nuevo/", ContratoPoliza.as_view(), name="contrato_nuevo"),
-
-
+    path("contratos/", ContratoPolizaListar.as_view(), name="contrato_listar"),
+    path("contratos/nuevo/", ContratoPoliza.as_view(), name="contrato_nuevo"),
 ]
