@@ -83,6 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'seguros',
         'USER': 'postgres',
+        # 'PASSWORD': '123456',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -125,3 +126,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+LOGIN_REDIRECT_URL='/cha_app/home'
+LOGOUT_REDIRECT_URL='/LOGIN'
