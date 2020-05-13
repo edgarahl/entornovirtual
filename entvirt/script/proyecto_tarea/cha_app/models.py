@@ -96,4 +96,28 @@ class ContratoPoliza(models.Model):
         verbose_name_plural = "Contratos"
 
     def __str__(self):
-        return "{} ".format(self.id_poliza)
+        return "{}{}{} ".format(self.id_poliza.descripcion, self.id_asegurado.nombres, self.id_asegurado.apellidos)
+
+
+class Doctor(models.Model):
+    nombres = models.CharField(
+        max_length=100,
+        blank=False,
+        null=False
+    )
+    apellidos = models.CharField(
+        max_length=100,
+        blank=False,
+        null=False
+    )
+
+    estado = models.BooleanField(default=True)
+
+    def __str__(self):
+        return "{} {}".format(self.nombres, self.apellidos)
+
+    def save(self):
+        self.nombres = self.nombres.upper()
+        self.apellidos = self.apellidos.upper()
+        super(Doctor, self).save()
+

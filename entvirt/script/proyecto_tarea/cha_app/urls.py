@@ -19,7 +19,8 @@ from . import views
 from django.urls import path, include
 from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar, PolizaListar, PolizaNueva \
     , HospitalListar, HospitalNuevo, HospitalEditar, HospitalBorrar, AseguradoNuevo, AseguradoEditar, AseguradoBorrar, \
-    AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza, ContratoPolizaListar, home, SinPrivilegios
+    AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza, ContratoPolizaListar, home, TemplateSinPrivilegio, \
+    DoctorNuevo, DoctorBorrar, DoctorEditar, DoctorListar
 
 urlpatterns = [
     path('home', home, name='home'),
@@ -43,8 +44,12 @@ urlpatterns = [
     # path("login/", views.loginpage, name="loginpage"),
     path("", auth_views.LoginView.as_view(template_name='cha_app/login.html'), name="login"),
     path("", auth_views.LogoutView.as_view(template_name='cha_app/login.html'), name="logout"),
-    path('sin_privilegios/', SinPrivilegios.as_view, name='sin_privilegios'),
+    path('sin_privilegios/', TemplateSinPrivilegio.as_view(), name='sin_privilegios'),
     # path("login/", auth_views.LoginView.as_view(template_name='cha_app/login.html'), name="login"),
     path("contratos/", ContratoPolizaListar.as_view(), name="contrato_listar"),
     path("contratos/nuevo/", ContratoPoliza.as_view(), name="contrato_nuevo"),
+    path("doctor/nuevo/", DoctorNuevo.as_view(), name="doctor_nuevo"),
+    path("doctor/editar/<int:pk>", DoctorEditar.as_view(), name="doctor_editar"),
+    path("doctor/borrar/<int:pk>", DoctorBorrar.as_view(), name="doctor_borrar"),
+    path("doctor/", DoctorListar.as_view(), name="doctor_listar")
 ]

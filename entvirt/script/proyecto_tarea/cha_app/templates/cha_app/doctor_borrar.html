@@ -1,0 +1,17 @@
+{% extends 'base/home.html' %}
+
+{% block contenido %}
+<br>
+<div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">Confirma</div>
+    <div class="card-body">
+      <form method="post">{% csrf_token %}
+        <h3>¿Borrar {{ obj.nombres }} {{ obj.apellidos }}?</h3>
+        <button type="submit" class="btn btn-danger" >Si, Borrar</button>
+        <a href="{% url 'app:doctor_listar' %}" class="btn btn-info">No, Cancelar</a>
+    </form>
+    </div>
+  </div>
+  
+  </div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza
+from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor
 
 
 class VendedorForm(forms.ModelForm):
@@ -54,3 +54,14 @@ class ContratoPolizaForm(forms.ModelForm):
                                          attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
                                                 'type': 'date'})
         }
+
+
+class DoctorForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        fields = ['nombres', 'apellidos','estado']
+        lables = {'nombres': 'Nombre', 'apellidos': 'Apellidos',
+                  'estado': 'Estado'}
+
+
+
