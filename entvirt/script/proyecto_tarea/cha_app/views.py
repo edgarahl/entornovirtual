@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.views import generic
-from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos
+from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos, Doctor
+
 from django.urls import reverse_lazy
-from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm
+from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm, DoctorForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
@@ -14,7 +15,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 
 # Create your views here.
 
-class ClaseBase(LoginRequiredMixin, PermissionRequiredMixin):
+class SinPrivilegio(PermissionRequiredMixin):
+    raise_exception = False
+    redirect_field_name = 'redirect_to'
+
+    def handle_no_permission(self):
+        self.login_url = 'cha_app:sin_privilegios'
+        return HttpResponseRedirect(reverse_lazy(self.login_url))
+
+
+class ClaseBase(LoginRequiredMixin, SinPrivilegio):
     login_url = 'cha_app:login'
 
 
@@ -26,7 +36,7 @@ def home(request):
     )
 
 
-class SinPrivilegios(generic.TemplateView):
+class TemplateSinPrivilegio(generic.TemplateView):
     template_name = 'base/sin_permisos.html'
 
 
@@ -93,11 +103,13 @@ class VendedorBorrar(ClaseBase, generic.DeleteView):
     success_url = reverse_lazy('cha_app:vendedor_borrar')
     permission_required = "cha_app.delete_vendedor"
 
+
 class AseguradoListar(ClaseBase, generic.ListView):
     model = Asegurado
     template_name = 'cha_app/asegurado_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     permission_required = "cha_app.view_asegurado"
+
 
 class AseguradoNuevo(ClaseBase, generic.CreateView):
     model = Asegurado
@@ -106,6 +118,7 @@ class AseguradoNuevo(ClaseBase, generic.CreateView):
     form_class = AseguradoForm
     success_url = reverse_lazy('cha_app:asegurado_listar')
     permission_required = "cha_app.add_asegurado"
+
 
 class AseguradoEditar(ClaseBase, generic.UpdateView):
     model = Asegurado
@@ -131,6 +144,7 @@ class PolizaListar(ClaseBase, generic.ListView):
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     permission_required = "cha_app.view_poliza"
 
+
 class PolizaNueva(ClaseBase, generic.CreateView):
     model = Poliza
     template_name = 'cha_app/poliza_form.html'
@@ -138,6 +152,7 @@ class PolizaNueva(ClaseBase, generic.CreateView):
     form_class = PolizaForm
     success_url = reverse_lazy('cha_app:poliza_listar')
     permission_required = "cha_app.add_poliza"
+
 
 class PolizaEditar(ClaseBase, generic.UpdateView):
     model = Poliza
@@ -147,6 +162,7 @@ class PolizaEditar(ClaseBase, generic.UpdateView):
     success_url = reverse_lazy('cha_app:poliza_listar')
     permission_required = "cha_app.change_poliza"
 
+
 class PolizaBorrar(ClaseBase, generic.DeleteView):
     model = Poliza
     template_name = 'cha_app/poliza_borrar.html'
@@ -155,11 +171,14 @@ class PolizaBorrar(ClaseBase, generic.DeleteView):
     success_url = reverse_lazy('cha_app:poliza_listar')
     permission_required = "cha_app.delete_poliza"
 
+
 class HospitalListar(ClaseBase, generic.ListView):
     model = Hospital
     template_name = 'cha_app/hospital_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     permission_required = "cha_app.view_hospital"
+    paginate_by = 5
+
 
 class HospitalNuevo(ClaseBase, generic.CreateView):
     model = Hospital
@@ -169,6 +188,7 @@ class HospitalNuevo(ClaseBase, generic.CreateView):
     success_url = reverse_lazy('cha_app:hospital_listar')
     permission_required = "cha_app.add_hospital"
 
+
 class HospitalEditar(ClaseBase, generic.UpdateView):
     model = Hospital
     template_name = 'cha_app/hospital_form.html'
@@ -177,6 +197,7 @@ class HospitalEditar(ClaseBase, generic.UpdateView):
     success_url = reverse_lazy('cha_app:hospital_listar')
     permission_required = "cha_app.change_hospital"
 
+
 class HospitalBorrar(ClaseBase, generic.DeleteView):
     model = Hospital
     template_name = 'cha_app/hospital_borrar.html'
@@ -184,6 +205,7 @@ class HospitalBorrar(ClaseBase, generic.DeleteView):
     form_class = HospitalForm
     success_url = reverse_lazy('cha_app:hospital_listar')
     permission_required = "cha_app.delete_hosptal"
+
 
 class ContratoPoliza(ClaseBase, generic.CreateView):
     model = Contratos
@@ -199,6 +221,36 @@ class ContratoPolizaListar(ClaseBase, generic.ListView):
     template_name = 'cha_app/contrato_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     permission_required = "cha_app.view_contratopoliza"
+
+
+class DoctorNuevo(generic.CreateView):
+    model = Doctor
+    template_name = 'cha_app/doctor_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = DoctorForm
+    success_url = reverse_lazy('cha_app:doctor_listar')
+
+
+class DoctorEditar(generic.UpdateView):
+    model = Doctor
+    template_name = 'cha_app/doctor_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = DoctorForm
+    success_url = reverse_lazy('cha_app:doctor_listar')
+
+
+class DoctorBorrar(generic.DeleteView):
+    model = Doctor
+    template_name = 'cha_app/doctor_borrar.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = DoctorForm
+    success_url = reverse_lazy('cha_app:doctor_listar')
+
+
+class DoctorListar(generic.ListView):
+    model = Doctor
+    template_name = 'cha_app/doctor_list.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
 
 
 """para el funcionamiento del Login
