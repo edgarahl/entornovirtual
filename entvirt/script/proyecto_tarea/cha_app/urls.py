@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-# from . import views
+from . import views
 from django.urls import path, include
 from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar, PolizaListar, PolizaNueva \
     , HospitalListar, HospitalNuevo, HospitalEditar, HospitalBorrar, AseguradoNuevo, AseguradoEditar, AseguradoBorrar, \
-    AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza, ContratoPolizaListar
+    AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza, ContratoPolizaListar, home, SinPrivilegios
 
 urlpatterns = [
+    path('home', home, name='home'),
     path("vendedores/", VendedorListar.as_view(), name="vendedor_listar"),
     path("vendedores/nuevo/", VendedorNueva.as_view(), name="vendedor_nuevo"),
     path("vendedores/editar/<int:pk>", VendedorEditar.as_view(), name="vendedor_editar"),
@@ -38,9 +39,12 @@ urlpatterns = [
     path("asegurados/editar/<int:pk>", AseguradoEditar.as_view(), name="asegurado_editar"),
     path("asegurados/borrar/<int:pk>", AseguradoBorrar.as_view(), name="asegurado_borrar"),
     path("asegurados/", AseguradoListar.as_view(), name="asegurado_listar"),
-    #path("login/", views.loginpage, "loginpage"),
+    # path("", views.loginpage, name="loginpage"),
+    # path("login/", views.loginpage, name="loginpage"),
     path("", auth_views.LoginView.as_view(template_name='cha_app/login.html'), name="login"),
-    path("login/", auth_views.LoginView.as_view(template_name='cha_app/login.html'), name="login"),
+    path("", auth_views.LogoutView.as_view(template_name='cha_app/login.html'), name="logout"),
+    path('sin_privilegios/', SinPrivilegios.as_view, name='sin_privilegios'),
+    # path("login/", auth_views.LoginView.as_view(template_name='cha_app/login.html'), name="login"),
     path("contratos/", ContratoPolizaListar.as_view(), name="contrato_listar"),
     path("contratos/nuevo/", ContratoPoliza.as_view(), name="contrato_nuevo"),
 ]
