@@ -176,3 +176,22 @@ class Tratamiento(models.Model):
 
     def __str__(self):
         return "{}".format(self.descripcion)
+
+
+class DetalleTratamiento(models.Model):
+    hospitalizacion = models.ForeignKey('Hospitalizacion', on_delete=models.CASCADE, null=False)
+    tratamiento= models.ForeignKey('Tratamiento', on_delete=models.CASCADE, null=False)
+    descripcion = models.CharField(
+        max_length=100,
+        blank=False,
+        null=False
+    )
+    fecha = models.DateField(null=False, blank=False)
+    costo = models.FloatField(default=0)
+    estado = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "DetalleTratamientos"
+
+    def __str__(self):
+        return "{}".format(self.descripcion)
