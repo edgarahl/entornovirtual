@@ -25,7 +25,11 @@
                 <td>{{ item.fecha_contrato }}</td>
                 <td>{{ item.fecha_inicio }}</td>
                 <td>{{ item.fecha_fin }}</td>
-                <td>{{ item.estado }}</td>
+                <td> {% if item.estado %}
+                       Activa
+                     {% else %}
+                       Inactiva
+                     {% endif %}</td>
                 <td>
 
                 </td>
@@ -39,4 +43,11 @@
   </div>
   
   </div>
+{% endblock %}
+{% block js_page %}
+<script language="JavaScript">
+    $(document).ready(function() {
+        $('.table').DataTable();
+    } );
+</script>
 {% endblock %}
