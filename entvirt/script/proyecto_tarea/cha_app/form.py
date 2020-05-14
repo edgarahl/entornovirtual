@@ -1,5 +1,5 @@
 from django import forms
-from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor, Familiares
+from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor, Familiares, Hospitalizacion
 
 
 class VendedorForm(forms.ModelForm):
@@ -39,7 +39,7 @@ class AseguradoForm(forms.ModelForm):
 class ContratoPolizaForm(forms.ModelForm):
     class Meta:
         model = ContratoPoliza
-        fields = ['id_poliza', 'id_vendedor', 'id_asegurado', 'fecha_contrato', 'fecha_inicio', 'fecha_fin', 'estado']
+        fields = ['id_poliza', 'id_hospital', 'id_asegurado', 'fecha_entrada', 'fecha_salida', ]
         lables = {'id_poliza': 'Poliza', 'id_vendedor': 'Vendedor', 'id_asegurado': 'Asegurado',
                   'fecha_contrato': 'Fecha Contrato', \
                   'fecha_inicio': 'Fecha Inicio', 'fecha_fin': 'Fecha Fin', 'estado': 'Estado'}
@@ -76,5 +76,19 @@ class FamiliaresForm(forms.ModelForm):
         }
 
 
+class HospitalizacionForm(forms.ModelForm):
+    class Meta:
+        model = Hospitalizacion
+        fields = ['id_poliza', 'id_hospital', 'id_asegurado', 'id_doctor',  'fecha_inicio', 'fecha_fin']
+        lables = {'id_poliza': 'Poliza', 'id_hospital': 'Hospital', 'id_asegurado': 'Asegurado', 'id_doctor':'Doctor',
+                  'fecha_inicio': 'Fecha Ingresa', 'fecha_fin': 'Fecha Egresa'}
+        widgets = {
+            'fecha_inicio': forms.DateInput(format=('%Y-%m-%d'),
+                                              attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
+                                                     'type': 'date'}),
+            'fecha_fin': forms.DateInput(format=('%Y-%m-%d'),
+                                            attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
+                                                   'type': 'date'})
+        }
 
 
