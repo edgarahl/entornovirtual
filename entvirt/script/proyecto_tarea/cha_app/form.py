@@ -1,5 +1,5 @@
 from django import forms
-from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor
+from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor, Familiares
 
 
 class VendedorForm(forms.ModelForm):
@@ -62,6 +62,19 @@ class DoctorForm(forms.ModelForm):
         fields = ['nombres', 'apellidos','estado']
         lables = {'nombres': 'Nombre', 'apellidos': 'Apellidos',
                   'estado': 'Estado'}
+
+
+class FamiliaresForm(forms.ModelForm):
+    class Meta:
+        model = Familiares
+        fields = ['asegurado', 'fecha_nacimiento', 'nombres', 'apellidos']
+        lables = {'asegurado': 'Nombres', 'Fecha_nacimiento': 'fecha_nacimiento','Apellidos': 'apellidos'}
+        widgets = {
+            'fecha_nacimiento': forms.DateInput(format=('%Y-%m-%d'),
+                                              attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
+                                                     'type': 'date'})
+        }
+
 
 
 

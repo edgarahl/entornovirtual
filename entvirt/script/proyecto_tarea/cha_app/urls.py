@@ -20,7 +20,9 @@ from django.urls import path, include
 from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar, PolizaListar, PolizaNueva \
     , HospitalListar, HospitalNuevo, HospitalEditar, HospitalBorrar, AseguradoNuevo, AseguradoEditar, AseguradoBorrar, \
     AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza, ContratoPolizaListar, home, TemplateSinPrivilegio, \
-    DoctorNuevo, DoctorBorrar, DoctorEditar, DoctorListar
+    DoctorNuevo, DoctorBorrar, DoctorEditar, DoctorListar, FamiliaresBorrar, FamiliaresEditar, FamiliaresListar, \
+    FamiliaresNuevo
+from .reportes import reporte_vendedores
 
 urlpatterns = [
     path('home', home, name='home'),
@@ -51,5 +53,10 @@ urlpatterns = [
     path("doctor/nuevo/", DoctorNuevo.as_view(), name="doctor_nuevo"),
     path("doctor/editar/<int:pk>", DoctorEditar.as_view(), name="doctor_editar"),
     path("doctor/borrar/<int:pk>", DoctorBorrar.as_view(), name="doctor_borrar"),
-    path("doctor/", DoctorListar.as_view(), name="doctor_listar")
+    path("doctor/", DoctorListar.as_view(), name="doctor_listar"),
+    path("familiares/nuevo/", FamiliaresNuevo.as_view(), name="familiares_nuevo"),
+    path("familiares/editar/<int:pk>", FamiliaresEditar.as_view(), name="familiares_editar"),
+    path("familiares/borrar/<int:pk>", FamiliaresBorrar.as_view(), name="familiares_borrar"),
+    path("familiares/", FamiliaresListar.as_view(), name="familiares_listar"),
+    path("reportes/vendedores/", reporte_vendedores, name='vendedores_print_all'),
 ]

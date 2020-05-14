@@ -85,7 +85,7 @@ class Hospital(models.Model):
 class ContratoPoliza(models.Model):
     id_poliza = models.ForeignKey('Poliza', on_delete=models.CASCADE, null=False)
     id_vendedor = models.ForeignKey('Vendedor', on_delete=models.CASCADE, null=False)
-    id_asegurado = models.ForeignKey('Asegurado',on_delete=models.CASCADE, null=False)
+    id_asegurado = models.ForeignKey('Asegurado', on_delete=models.CASCADE, null=False)
     fecha_contrato = models.DateField(null=False, blank=False)
     fecha_inicio = models.DateField(null=False, blank=False)
     fecha_fin = models.DateField(null=False, blank=False)
@@ -121,3 +121,26 @@ class Doctor(models.Model):
         self.apellidos = self.apellidos.upper()
         super(Doctor, self).save()
 
+
+class Familiares(models.Model):
+    asegurado = models.ForeignKey('Asegurado', on_delete=models.CASCADE, null=False)
+    fecha_nacimiento = models.DateField(null=False, blank=False)
+    estado = models.BooleanField(default=True)
+
+    nombres = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+    apellidos = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        ordering = ["asegurado"]
+        verbose_name_plural = "Asegurados"
+
+    def __str__(self):
+        return "{}{}{} ".format(self.asegurado.nombres, self.nombres, self.apellidos)

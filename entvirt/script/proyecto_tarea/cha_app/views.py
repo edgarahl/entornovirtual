@@ -3,10 +3,10 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.views import generic
-from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos, Doctor
+from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos, Doctor, Familiares
 
 from django.urls import reverse_lazy
-from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm, DoctorForm
+from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm, DoctorForm, FamiliaresForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
@@ -252,6 +252,35 @@ class DoctorListar(generic.ListView):
     template_name = 'cha_app/doctor_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
 
+
+class FamiliaresNuevo(generic.CreateView):
+    model = Familiares
+    template_name = 'cha_app/familiares_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = FamiliaresForm
+    success_url = reverse_lazy('cha_app:familiares_listar')
+
+
+class FamiliaresEditar(generic.UpdateView):
+    model = Familiares
+    template_name = 'cha_app/familiares_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = FamiliaresForm
+    success_url = reverse_lazy('cha_app:familiares_listar')
+
+
+class FamiliaresBorrar(generic.DeleteView):
+    model = Familiares
+    template_name = 'cha_app/familiares_borrar.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = FamiliaresForm
+    success_url = reverse_lazy('cha_app:familiares_listar')
+
+
+class FamiliaresListar(generic.ListView):
+    model = Familiares
+    template_name = 'cha_app/familiares_list.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
 
 """para el funcionamiento del Login
 """
