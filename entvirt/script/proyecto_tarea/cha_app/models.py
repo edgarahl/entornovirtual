@@ -152,7 +152,7 @@ class Hospitalizacion(models.Model):
     contrato = models.ForeignKey('ContratoPoliza', on_delete=models.CASCADE, null=False)
     hospital = models.ForeignKey('Hospital', on_delete=models.CASCADE, null=False)
     fecha_entrada = models.DateField(null=False, blank=False)
-    fecha_salida = models.DateField(null=False, blank=False)
+    fecha_salida = models.DateField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Hospitalizaciones"
