@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos, Doctor, Familiares, \
-    Hospitalizacion, Tratamiento
+    Hospitalizacion, Tratamiento, DetalleTratamiento
 
 from django.urls import reverse_lazy
 from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm, DoctorForm, \
-    FamiliaresForm, HospitalizacionForm, TratamientoForm
+    FamiliaresForm, HospitalizacionForm, TratamientoForm, DetalleTratamientoForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
@@ -342,6 +342,36 @@ class TratamientoBorrar(generic.DeleteView):
 class TratamientoListar(generic.ListView):
     model = Tratamiento
     template_name = 'cha_app/tratamiento_list.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+
+
+class DetalleTratamientoNuevo(generic.CreateView):
+    model = DetalleTratamiento
+    template_name = 'cha_app/detalletratamiento_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = DetalleTratamientoForm
+    success_url = reverse_lazy('cha_app:detalletratamiento_listar')
+
+
+class DetalleTratamientoEditar(generic.UpdateView):
+    model = DetalleTratamiento
+    template_name = 'cha_app/detalletratamiento_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = DetalleTratamientoForm
+    success_url = reverse_lazy('cha_app:detalletratamiento_listar')
+
+
+class DetalleTratamientoBorrar(generic.DeleteView):
+    model = DetalleTratamiento
+    template_name = 'cha_app/detalletratamiento_borrar.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = DetalleTratamientoForm
+    success_url = reverse_lazy('cha_app:detalletratamiento_list')
+
+
+class DetalleTratamientoListar(generic.ListView):
+    model = DetalleTratamiento
+    template_name = 'cha_app/detalletratamiento_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
 
 
