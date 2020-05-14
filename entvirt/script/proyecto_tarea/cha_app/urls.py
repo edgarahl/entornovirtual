@@ -22,7 +22,8 @@ from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar
     AseguradoListar, PolizaEditar, PolizaBorrar, index, ContratoPoliza, ContratoPolizaListar, home, TemplateSinPrivilegio, \
     DoctorNuevo, DoctorBorrar, DoctorEditar, DoctorListar, FamiliaresBorrar, FamiliaresEditar, FamiliaresListar, \
     FamiliaresNuevo, HospitalizacionNuevo, HospitalizacionBorrar, HospitalizacionListar, HospitalizacionEditar, \
-    Tratamiento, TratamientoNuevo, TratamientoBorrar, TratamientoEditar, TratamientoListar
+    TratamientoNuevo, TratamientoBorrar, TratamientoEditar, TratamientoListar, DetalleTratamientoNuevo, \
+    DetalleTratamientoBorrar, DetalleTratamientoEditar, DetalleTratamientoListar
 from .reportes import reporte_vendedores
 
 urlpatterns = [
@@ -77,4 +78,10 @@ urlpatterns = [
     path("tratamientos/editar/<int:pk>", TratamientoEditar.as_view(), name="tratamiento_editar"),
     path("tratamientos/borrar/<int:pk>", TratamientoBorrar.as_view(), name="tratamiento_borrar"),
     path("tratamientos/", TratamientoListar.as_view(), name="tratamiento_listar"),
+
+
+    path("detalletratamientos/nuevo/<int:pk>", DetalleTratamientoNuevo.as_view(), name="detalletratamiento_nuevo"),
+    path("detalletratamientos/editar/<int:pk>", DetalleTratamientoEditar.as_view(), name="detalletratamiento_editar"),
+    path("detalletratamientos/borrar/<int:pk>", DetalleTratamientoBorrar.as_view(), name="detalletratamiento_borrar"),
+    path("detalletratamientos/", DetalleTratamientoListar.as_view(), name="detalletratamiento_listar"),
 ]
