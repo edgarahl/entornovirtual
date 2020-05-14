@@ -7,6 +7,7 @@
     <title>Proyecto Control de Hospitalizacion de Asegurados</title>
     <link rel="stylesheet" href="{% static 'base/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'base/fontAwesone/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/dataTables.min.css' %}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -24,10 +25,10 @@
               <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Catalogos</a>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{% url 'cha_app:vendedor_listar' %}">Vendedores</a>
-                      <a class="dropdown-item" href="{% url 'cha_app:poliza_listar' %}">Polizas</a>
-                      <a class="dropdown-item" href="{% url 'cha_app:hospital_listar' %}">Hospitales</a>
-                      <a class="dropdown-item" href="{% url 'cha_app:doctor_listar' %}">Médicos</a>
+                      <a class="dropdown-item" href="{% url 'cha_app:vendedor_listar' %}"><i class="fa fa-child"></i> Vendedores</a>
+                      <a class="dropdown-item" href="{% url 'cha_app:poliza_listar' %}"><i class="fa fa-address-card"></i> Polizas</a>
+                      <a class="dropdown-item" href="{% url 'cha_app:hospital_listar' %}"><i class="fa fa-hospital"></i> Hospitales</a>
+                      <a class="dropdown-item" href="{% url 'cha_app:doctor_listar' %}"><i class="fa fa-user-md"></i> Médicos</a>
                      <!-- <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Separated link</a> -->
                     </div>
@@ -36,22 +37,26 @@
             <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Contratar Poliza</a>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{% url 'cha_app:asegurado_nuevo' %}">Registrar Asegurado</a>
-                      <a class="dropdown-item" href="{% url 'cha_app:contrato_nuevo' %}">Registrar Contrato</a>
+                      <a class="dropdown-item" href="{% url 'cha_app:asegurado_nuevo' %}"><i class="fa fa-street-view"></i> Registrar Asegurado</a>
+                      <a class="dropdown-item" href="{% url 'cha_app:contrato_nuevo' %}"><i class="fa fa-edit"></i> Registrar Contrato</a>
 
                      <!-- <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Separated link</a> -->
                     </div>
               </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'cha_app:vendedor_nuevo' %}">Gestionar Familiares</a>
+              <a class="nav-link" href="{% url 'cha_app:familiares_listar' %}">Familiares</a>
+
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Hospitalizacion</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Reportes</a>
-            </li>
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'cha_app:vendedores_print_all' %}" TARGET="reportes"><i class="fa fa-child"></i> Vendedores</a>
+                    </div>
+              </li>
              <li class="nav-item">
               <a class="nav-link" href="{% url 'cha_app:logout' %}">Salir</a>
             </li>
@@ -76,8 +81,14 @@
     {% endblock %}
 </di>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
+
+
+    <script src="{% static 'base/js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+    <!-- <script src="{% static 'base/js/dataTables.bootstrap4.min.js' %}"></script> -->
+    <script src="{% static 'base/js/jquery.dataTables.min.js' %}"></script>
 </body>
+
+{% block js_page %}
+{% endblock %}
 </html>
