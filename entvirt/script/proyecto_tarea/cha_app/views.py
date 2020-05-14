@@ -3,10 +3,12 @@ from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.views import generic
-from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos, Doctor, Familiares
+from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos, Doctor, Familiares, \
+    Hospitalizacion
 
 from django.urls import reverse_lazy
-from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm, DoctorForm, FamiliaresForm
+from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm, DoctorForm, FamiliaresForm, \
+    HospitalizacionForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
@@ -281,6 +283,39 @@ class FamiliaresListar(generic.ListView):
     model = Familiares
     template_name = 'cha_app/familiares_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
+
+
+class HospitalizacionNuevo(generic.CreateView):
+    model = Hospitalizacion
+    template_name = 'cha_app/hospitalizacion_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = FamiliaresForm
+    success_url = reverse_lazy('cha_app:hospitalizacion_listar')
+
+
+class HospitalizacionEditar(generic.UpdateView):
+    model = Hospitalizacion
+    template_name = 'cha_app/familiares_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = HospitalizacionForm
+    success_url = reverse_lazy('cha_app:hospitalizacion_listar')
+
+
+class HospitalizacionBorrar(generic.DeleteView):
+    model = Hospitalizacion
+    template_name = 'cha_app/hospitalizacion_borrar.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = FamiliaresForm
+    success_url = reverse_lazy('cha_app:hospitalizacion_listar')
+
+
+class HospitalizacionListar(generic.ListView):
+    model = Hospitalizacion
+    template_name = 'cha_app/hospitalizacion_list.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+
+
+
 
 """para el funcionamiento del Login
 """
