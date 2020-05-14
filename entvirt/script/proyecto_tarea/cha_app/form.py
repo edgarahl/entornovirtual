@@ -1,6 +1,6 @@
 from django import forms
 from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor, Familiares, Hospitalizacion, \
-    Tratamiento
+    Tratamiento, DetalleTratamiento
 
 
 class VendedorForm(forms.ModelForm):
@@ -98,3 +98,15 @@ class TratamientoForm(forms.ModelForm):
         model = Tratamiento
         fields = ['descripcion', 'estado']
         lables = {'descripcion': 'Descripcion', 'estado': 'Estado'}
+
+
+class DetalleTratamientoForm(forms.ModelForm):
+    class Meta:
+        model = DetalleTratamiento
+        fields = ['tratamiento', 'descripcion', 'fecha', 'costo', 'estado']
+        labels = {'tratamiento':'Tratamiento','fecha':'Fecha','costo':'Costo','estado':'Estado'}
+        widgets = {
+            'fecha': forms.DateInput(format=('%Y-%m-%d'),
+                                             attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
+                                                    'type': 'date'})
+        }
