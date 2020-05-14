@@ -1,5 +1,6 @@
 from django import forms
-from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor, Familiares, Hospitalizacion
+from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor, Familiares, Hospitalizacion, \
+    Tratamiento
 
 
 class VendedorForm(forms.ModelForm):
@@ -39,7 +40,7 @@ class AseguradoForm(forms.ModelForm):
 class ContratoPolizaForm(forms.ModelForm):
     class Meta:
         model = ContratoPoliza
-        fields = ['id_poliza', 'id_hospital', 'id_asegurado', 'fecha_entrada', 'fecha_salida', ]
+        fields = ['id_poliza', 'id_vendedor', 'id_asegurado', 'fecha_contrato', 'fecha_inicio', 'fecha_fin', ]
         lables = {'id_poliza': 'Poliza', 'id_vendedor': 'Vendedor', 'id_asegurado': 'Asegurado',
                   'fecha_contrato': 'Fecha Contrato', \
                   'fecha_inicio': 'Fecha Inicio', 'fecha_fin': 'Fecha Fin', 'estado': 'Estado'}
@@ -59,7 +60,7 @@ class ContratoPolizaForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
     class Meta:
         model = Doctor
-        fields = ['nombres', 'apellidos','estado']
+        fields = ['nombres', 'apellidos', 'estado']
         lables = {'nombres': 'Nombre', 'apellidos': 'Apellidos',
                   'estado': 'Estado'}
 
@@ -68,27 +69,32 @@ class FamiliaresForm(forms.ModelForm):
     class Meta:
         model = Familiares
         fields = ['asegurado', 'fecha_nacimiento', 'nombres', 'apellidos']
-        lables = {'asegurado': 'Nombres', 'Fecha_nacimiento': 'fecha_nacimiento','Apellidos': 'apellidos'}
+        lables = {'asegurado': 'Nombres', 'Fecha_nacimiento': 'fecha_nacimiento', 'Apellidos': 'apellidos'}
         widgets = {
             'fecha_nacimiento': forms.DateInput(format=('%Y-%m-%d'),
-                                              attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
-                                                     'type': 'date'})
+                                                attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
+                                                       'type': 'date'})
         }
 
 
 class HospitalizacionForm(forms.ModelForm):
     class Meta:
         model = Hospitalizacion
-        fields = ['id_poliza', 'id_hospital', 'id_asegurado', 'id_doctor',  'fecha_inicio', 'fecha_fin']
-        lables = {'id_poliza': 'Poliza', 'id_hospital': 'Hospital', 'id_asegurado': 'Asegurado', 'id_doctor':'Doctor',
-                  'fecha_inicio': 'Fecha Ingresa', 'fecha_fin': 'Fecha Egresa'}
+        fields = ['contrato', 'hospital', 'doctor', 'fecha_entrada', 'fecha_salida']
+        lables = {'contrato': 'Contrato', 'asegurado': 'Asegurado', 'hospital': 'Hospital', 'doctor': 'Doctor',
+                  'fecha_entrada': 'Fecha Ingresa', 'fecha_salida': 'Fecha Egresa'}
         widgets = {
-            'fecha_inicio': forms.DateInput(format=('%Y-%m-%d'),
-                                              attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
-                                                     'type': 'date'}),
-            'fecha_fin': forms.DateInput(format=('%Y-%m-%d'),
+            'fecha_entrada': forms.DateInput(format=('%Y-%m-%d'),
+                                             attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
+                                                    'type': 'date'}),
+            'fecha_salida': forms.DateInput(format=('%Y-%m-%d'),
                                             attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
                                                    'type': 'date'})
         }
 
 
+class TratamientoForm(forms.ModelForm):
+    class Meta:
+        model = Tratamiento
+        fields = ['descripcion', 'estado']
+        lables = {'descripcion': 'Descripcion', 'estado': 'Estado'}

@@ -65,7 +65,7 @@ class Poliza(models.Model):
     valor_cobertura = models.FloatField(default=0)
 
     def __str__(self):
-        return "{} ".format(self.descripcion)
+        return "{} ".format(self.descripcion.upper())
 
 
 class Hospital(models.Model):
@@ -80,6 +80,9 @@ class Hospital(models.Model):
         null=False
     )
     estado = models.BooleanField(default=True)
+
+    def __str__(self):
+        return "{}".format(self.descripcion.upper())
 
 
 class ContratoPoliza(models.Model):
@@ -96,7 +99,7 @@ class ContratoPoliza(models.Model):
         verbose_name_plural = "Contratos"
 
     def __str__(self):
-        return "{}{}{} ".format(self.id_poliza.descripcion, self.id_asegurado.nombres, self.id_asegurado.apellidos)
+        return "{} - {}{}".format(self.id_poliza.descripcion, self.id_asegurado.nombres, self.id_asegurado.apellidos)
 
 
 class Doctor(models.Model):
@@ -147,7 +150,6 @@ class Familiares(models.Model):
 
 
 class Hospitalizacion(models.Model):
-    asegurado = models.ForeignKey('Asegurado', on_delete=models.CASCADE, null=False)
     doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE, null=False)
     contrato = models.ForeignKey('ContratoPoliza', on_delete=models.CASCADE, null=False)
     hospital = models.ForeignKey('Hospital', on_delete=models.CASCADE, null=False)
@@ -158,4 +160,19 @@ class Hospitalizacion(models.Model):
         verbose_name_plural = "Hospitalizaciones"
 
     def __str__(self):
-        return "{} {} {} {} {}".format(self.asegurado.nombres, self.asegurado.Apellidos, self.hospital.description, self.fecha_entrada, self.fecha_salida)
+        return "{} {} {} {} ".format(self.contrato.id_asegurado,self.hospital.descripcion,  self.fecha_entrada, self.fecha_salida)
+
+
+class Tratamiento(models.Model):
+    descripcion = models.CharField(
+        max_length=100,
+        blank=False,
+        null=False
+    )
+    estado = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Tratamientos"
+
+    def __str__(self):
+        return "{}".format(self.descripcion)
