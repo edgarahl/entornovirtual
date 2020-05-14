@@ -144,3 +144,18 @@ class Familiares(models.Model):
 
     def __str__(self):
         return "{}{}{} ".format(self.asegurado.nombres, self.nombres, self.apellidos)
+
+
+class Hospitalizacion(models.Model):
+    asegurado = models.ForeignKey('Asegurado', on_delete=models.CASCADE, null=False)
+    doctor = models.ForeignKey('Doctor', on_delete=models.CASCADE, null=False)
+    contrato = models.ForeignKey('ContratoPoliza', on_delete=models.CASCADE, null=False)
+    hospital = models.ForeignKey('Hospital', on_delete=models.CASCADE, null=False)
+    fecha_entrada = models.DateField(null=False, blank=False)
+    fecha_salida = models.DateField(null=False, blank=False)
+
+    class Meta:
+        verbose_name_plural = "Hospitalizaciones"
+
+    def __str__(self):
+        return "{} {} {} {} {}".format(self.asegurado.nombres, self.asegurado.Apellidos, self.hospital.description, self.fecha_entrada, self.fecha_salida)
