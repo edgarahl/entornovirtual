@@ -20,7 +20,11 @@
                 <td>{{ item.id }}</td>
                 <td>{{ item.descripcion }}</td>
                 <td>{{ item.direccion }}</td>
-                <td>{{ item.estado }}</td>
+                <td>{% if item.estado %}
+                       Activo
+                     {% else %}
+                       Inactivo
+                     {% endif %}</td>
                 <td><a href="{% url 'cha_app:hospital_editar' item.id %}" class="btn btn-warning"><i class='far fa-edit'></i></a>
                     <a href="{% url 'cha_app:hospital_borrar' item.id %}" class="btn btn-danger"><i class='fa fa-minus-circle'></i></a>
                 </td>
