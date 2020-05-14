@@ -3,13 +3,13 @@
 {% block contenido %}
 <br>
 <div class="card border-primary mb-3" style="max-width: 60rem;">
-    <div class="card-header">Listado de Familiares</div>
+    <div class="card-header">Listado de Hospitalizaciones</div>
     <div class="card-body">
         <table class="table table-hover">
           <thead>
               <th>Id</th>
               <th>Asegurado</th>
-              <th>FAMILIAR</th>
+              <th>Doctor</th>
               <th>Accion</th>
           </thead>
           <tbody>
@@ -17,7 +17,7 @@
             <tr>
                 <td>{{ item.id }}</td>
                 <td>{{ item.asegurado }}</td>
-                <td>{{ item.nombres|upper }} {{ item.apellidos|upper }}</td>
+                <td>{{ item.doctor|upper }}</td>
                 <td><a href="{% url 'cha_app:familiares_editar' item.id %}" class="btn btn-warning"><i class='far fa-edit'></i></a>
                     <a href="{% url 'cha_app:familiares_borrar' item.id %}" class="btn btn-danger"><i class='fa fa-minus-circle'></i></a>
 
