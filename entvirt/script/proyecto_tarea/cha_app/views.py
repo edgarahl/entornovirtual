@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos, Doctor, Familiares, \
-    Hospitalizacion
+    Hospitalizacion, Tratamiento
 
 from django.urls import reverse_lazy
-from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm, DoctorForm, FamiliaresForm, \
-    HospitalizacionForm
+from .form import VendedorForm, PolizaForm, HospitalForm, ContratoPolizaForm, AseguradoForm, DoctorForm, \
+    FamiliaresForm, HospitalizacionForm, TratamientoForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
@@ -289,13 +289,13 @@ class HospitalizacionNuevo(generic.CreateView):
     model = Hospitalizacion
     template_name = 'cha_app/hospitalizacion_form.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
-    form_class = FamiliaresForm
+    form_class = HospitalizacionForm
     success_url = reverse_lazy('cha_app:hospitalizacion_listar')
 
 
 class HospitalizacionEditar(generic.UpdateView):
     model = Hospitalizacion
-    template_name = 'cha_app/familiares_form.html'
+    template_name = 'cha_app/hospitalizacion_form.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = HospitalizacionForm
     success_url = reverse_lazy('cha_app:hospitalizacion_listar')
@@ -311,9 +311,38 @@ class HospitalizacionBorrar(generic.DeleteView):
 
 class HospitalizacionListar(generic.ListView):
     model = Hospitalizacion
-    template_name = 'cha_app/hospitalizacion_list.html'
+    template_name = 'cha_app/hospitalizaciones_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
 
+
+class TratamientoNuevo(generic.CreateView):
+    model = Tratamiento
+    template_name = 'cha_app/tratamiento_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = TratamientoForm
+    success_url = reverse_lazy('cha_app:tratamiento_listar')
+
+
+class TratamientoEditar(generic.UpdateView):
+    model = Tratamiento
+    template_name = 'cha_app/tratamiento_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = TratamientoForm
+    success_url = reverse_lazy('cha_app:tratamiento_listar')
+
+
+class TratamientoBorrar(generic.DeleteView):
+    model = Tratamiento
+    template_name = 'cha_app/tratamiento_borrar.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = TratamientoForm
+    success_url = reverse_lazy('cha_app:doctor_listar')
+
+
+class TratamientoListar(generic.ListView):
+    model = Tratamiento
+    template_name = 'cha_app/tratamiento_list.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
 
 
 
