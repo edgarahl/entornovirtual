@@ -23,19 +23,20 @@
               <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
             </li>
               <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Catalogos</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-archive"></i> Catalogos</a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{% url 'cha_app:vendedor_listar' %}"><i class="fa fa-child"></i> Vendedores</a>
                       <a class="dropdown-item" href="{% url 'cha_app:poliza_listar' %}"><i class="fa fa-address-card"></i> Polizas</a>
                       <a class="dropdown-item" href="{% url 'cha_app:hospital_listar' %}"><i class="fa fa-hospital"></i> Hospitales</a>
                       <a class="dropdown-item" href="{% url 'cha_app:doctor_listar' %}"><i class="fa fa-user-md"></i> Médicos</a>
+                      <a class="dropdown-item" href="{% url 'cha_app:tratamiento_listar' %}"><i class="fa fa-user-md"></i> Tratamientos</a>
                      <!-- <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Separated link</a> -->
                     </div>
               </li>
 
             <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Contratar Poliza</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-heartbeat"></i> Contratar Poliza</a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{% url 'cha_app:asegurado_nuevo' %}"><i class="fa fa-street-view"></i> Registrar Asegurado</a>
                       <a class="dropdown-item" href="{% url 'cha_app:contrato_nuevo' %}"><i class="fa fa-edit"></i> Registrar Contrato</a>
@@ -45,20 +46,20 @@
                     </div>
               </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'cha_app:familiares_listar' %}">Familiares</a>
+              <a class="nav-link" href="{% url 'cha_app:familiares_listar' %}"><i class="fa fa-female"></i> Familiares</a>
 
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Hospitalizacion</a>
+              <a class="nav-link" href="{% url 'cha_app:hospitalizaciones_listar' %}"><i class="fa fa-ambulance"></i> Hospitalizacion</a>
             </li>
             <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-clone"></i> Reportes</a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="{% url 'cha_app:vendedores_print_all' %}" TARGET="reportes"><i class="fa fa-child"></i> Vendedores</a>
                     </div>
               </li>
              <li class="nav-item">
-              <a class="nav-link" href="{% url 'cha_app:logout' %}">Salir</a>
+              <a class="nav-link" href="{% url 'cha_app:logout' %}"><i class="fa fa-power-off"></i> Salir</a>
             </li>
           </ul>
 
