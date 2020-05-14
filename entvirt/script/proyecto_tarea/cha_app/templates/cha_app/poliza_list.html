@@ -35,3 +35,10 @@
   
   </div>
 {% endblock %}
+{% block js_page %}
+<script language="JavaScript">
+    $(document).ready(function() {
+        $('.table').DataTable();
+    } );
+</script>
+{% endblock %}

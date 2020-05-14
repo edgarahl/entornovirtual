@@ -2,9 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>REPORTE DE VENDEDORES</title>
 </head>
 <body>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <H2>REPORTE DE VENDEDORES</H2>
+            <h3>Reporte de Compras al {{today|date:'d/m/Y'}}</h3>
+        </div>
+        <div class="card-body">
+        <table class="table">
+            <thead>
+              <th>Id</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+            </thead>
+            <tbody>
+            {% for item in obj %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.nombres }}</td>
+                <td>{{ item.apellidos }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

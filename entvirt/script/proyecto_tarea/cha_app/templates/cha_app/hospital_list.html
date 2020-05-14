@@ -2,10 +2,10 @@
 
 {% block contenido %}
 <br>
-<div class="card border-primary mb-3" style="max-width: 40rem;">
+<div class="card border-primary mb-3" style="max-width: 60rem;">
     <div class="card-header">Listado de Hospital</div>
     <div class="card-body">
-        <table class="table table-hover">
+        <table id="table" class="table table-hover table-striped">
           <thead>
               <th>Id</th>
               <th width="200">Descripcion</th>
@@ -55,4 +55,12 @@
   </div>
   
   </div>
+{% endblock %}
+
+{% block js_page %}
+<script language="JavaScript">
+    $(document).ready(function() {
+        $('.table').DataTable();
+    } );
+</script>
 {% endblock %}
