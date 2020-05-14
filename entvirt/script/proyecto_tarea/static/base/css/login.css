@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: linear-gradient(to right, #b92b27, #1565c0)
+    /* background: linear-gradient(to right, #b92b27, #1565c0) */
 }
 
 .box {
@@ -11,7 +11,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    background: #191919;
+     background: #158CBA;
     ;
     text-align: center;
     transition: 0.25s;
@@ -25,11 +25,11 @@ body {
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #3498db;
+    border: 2px solid #FEFEFE ;
     padding: 10px 10px;
     width: 250px;
     outline: none;
-    color: white;
+    color: blue;
     border-radius: 24px;
     transition: 0.25s
 }
@@ -59,6 +59,12 @@ body {
     border-radius: 24px;
     transition: 0.25s;
     cursor: pointer
+}
+
+.box input[type="text"]:hover,
+.box input[type="password"]:hover
+{
+    background: #ffffff
 }
 
 .box input[type="submit"]:hover {
