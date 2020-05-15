@@ -290,7 +290,7 @@ class HospitalizacionNuevo(generic.CreateView):
     template_name = 'cha_app/hospitalizacion_form.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = HospitalizacionForm
-    success_url = reverse_lazy('cha_app:hospitalizacion_listar')
+    success_url = reverse_lazy('cha_app:hospitalizaciones_listar')
 
 
 class HospitalizacionEditar(generic.UpdateView):
@@ -298,7 +298,7 @@ class HospitalizacionEditar(generic.UpdateView):
     template_name = 'cha_app/hospitalizacion_form.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = HospitalizacionForm
-    success_url = reverse_lazy('cha_app:hospitalizacion_listar')
+    success_url = reverse_lazy('cha_app:hospitalizaciones_listar')
 
 
 class HospitalizacionBorrar(generic.DeleteView):
@@ -306,12 +306,12 @@ class HospitalizacionBorrar(generic.DeleteView):
     template_name = 'cha_app/hospitalizacion_borrar.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = FamiliaresForm
-    success_url = reverse_lazy('cha_app:hospitalizacion_listar')
+    success_url = reverse_lazy('cha_app:hospitalizaciones_listar')
 
 
 class HospitalizacionListar(generic.ListView):
     model = Hospitalizacion
-    template_name = 'cha_app/hospitalizaciones_list.html'
+    template_name = 'cha_app/hospitalizacion_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
 
 
@@ -350,7 +350,18 @@ class DetalleTratamientoNuevo(generic.CreateView):
     template_name = 'cha_app/detalletratamiento_form.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = DetalleTratamientoForm
-    success_url = reverse_lazy('cha_app:detalletratamiento_listar')
+
+    def get_context_data(self, **kwargs):
+        content = super().get_context_data(**kwargs)
+        id = self.kwargs.get('id')
+        hospitalizacion = Hospitalizacion.objects.filter(id=id).first()
+        content['hospitalizacion'] = hospitalizacion
+        return content
+
+    def form_valid(self, form):
+        form.instance.hospitalizacion_id = self.kwargs.get('id')
+        form.save()
+        return HttpResponseRedirect(reverse_lazy('cha_app:hospitalizaciones_listar'))
 
 
 class DetalleTratamientoEditar(generic.UpdateView):
@@ -373,7 +384,6 @@ class DetalleTratamientoListar(generic.ListView):
     model = DetalleTratamiento
     template_name = 'cha_app/detalletratamiento_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
-
 
 
 """para el funcionamiento del Login
