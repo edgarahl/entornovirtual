@@ -55,10 +55,11 @@ def reporte_vendedores(request):
     return response
 
 
-def reporte_contrato(request):
-    template_path = 'cha_app/vendedores_print_all.html'
+def reporte_contrato(request, self, **kwargs):
+    template_path = 'cha_app/contrato_print.html'
+    id = self.kwargs.get('id')
     today = timezone.now()
-    contratoPoliza = ContratoPoliza.objects.all()
+    contratoPoliza = ContratoPoliza.objects.first(id=id)
     context = {
         'obj': contratoPoliza,
         'today': today,
@@ -66,7 +67,7 @@ def reporte_contrato(request):
     }
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="contrato_de_poliza.pdf"'
-    template = get_template(template_path)
+    template = get_template(template_pat)
     html = template.render(context)
     pisaStatus = pisa.CreatePDF(
         html, dest=response, link_callback=link_callback)
