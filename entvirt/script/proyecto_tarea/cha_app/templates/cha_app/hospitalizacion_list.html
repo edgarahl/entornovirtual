@@ -2,12 +2,12 @@
 
 {% block contenido %}
 <br>
-<div class="card border-primary mb-3" style="max-width: 80rem;">
+<div class="card border-primary mb-3" style="max-width: 100rem;">
     <div class="card-header">Listado de Hospitalzaciones</div>
     <div class="card-body">
         <table class="table table-hover">
           <thead>
-              <th>Numero de Hospitalizacion</th>
+              <th width="50">Numero de Hospitalizacion</th>
               <th>TIpo de Poliza</th>
               <th>Asegurado</th>
               <th>Hospital</th>
@@ -29,7 +29,7 @@
                 <td><a href="{% url 'cha_app:hospitalizaciones_editar' item.id %}" class="btn btn-warning"><i class='far fa-edit'></i></a>
                     <a href="{% url 'cha_app:hospitalizaciones_borrar' item.id %}" class="btn btn-danger"><i class='fa fa-minus-circle'></i></a>
                     <a href="{% url 'cha_app:detalletratamiento_nuevo' item.id  %}" class="btn btn-success"><i class='fa fa-stethoscope'></i></a>
-
+                    <a href="{% url 'cha_app:detalletratamiento_listar' item.id  %}" class="btn btn-info"><i class='fa fa-align-justify'></i></a>
                 </td>
         </tr>
         {% endfor %}        
