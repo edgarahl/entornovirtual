@@ -80,7 +80,7 @@ urlpatterns = [
     path("tratamientos/", TratamientoListar.as_view(), name="tratamiento_listar"),
 
 
-    path("detalletratamientos/nuevo/<int:pk>", DetalleTratamientoNuevo.as_view(), name="detalletratamiento_nuevo"),
+    path("detalletratamientos/nuevo/<int:id>", DetalleTratamientoNuevo.as_view(), name="detalletratamiento_nuevo"),
     path("detalletratamientos/editar/<int:pk>", DetalleTratamientoEditar.as_view(), name="detalletratamiento_editar"),
     path("detalletratamientos/borrar/<int:pk>", DetalleTratamientoBorrar.as_view(), name="detalletratamiento_borrar"),
     path("detalletratamientos/", DetalleTratamientoListar.as_view(), name="detalletratamiento_listar"),
