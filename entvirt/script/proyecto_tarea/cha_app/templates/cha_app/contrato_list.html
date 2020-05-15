@@ -31,7 +31,8 @@
                        Inactiva
                      {% endif %}</td>
                 <td>
-
+                  <a href="{% url 'cha_app:contrato_editar' item.id %}" class="btn btn-warning"><i class='far fa-edit'></i>
+                  <a href="{% url 'cha_app:contrato_borrar' item.id %}" class="btn btn-danger"><i class='fa fa-minus-circle'></i>
                 </td>
         </tr>
         {% endfor %}
