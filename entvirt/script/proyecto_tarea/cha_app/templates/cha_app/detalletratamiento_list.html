@@ -3,7 +3,7 @@
 {% block contenido %}
 <br>
 <div class="card border-primary mb-3" style="max-width: 60rem;">
-    <div class="card-header">Listado de Tratamientos Aplicados </div>
+    <div class="card-header">Listado de Tratamientos Aplicados  </div>
     <div class="card-body">
         <table class="table table-hover">
           <thead>
@@ -12,6 +12,7 @@
               <th>Accion</th>
           </thead>
           <tbody>
+
             {% for item in obj %}
             <tr>
                 <td>{{ item.id }}</td>
@@ -25,9 +26,12 @@
           </tbody>
       </table>
     </div>
+    <div class="card-footer">
+
+    </div>
   </div>
-  <div class="card-footer">
-    <a href="{% url 'cha_app:detalletratamiento_nuevo' id=item.id %}" class="btn btn-primary"><i class='fa fa-plus-circle'></i>&nbsp;Nuevo</a>
+
+
 </div>
   
   </div>
