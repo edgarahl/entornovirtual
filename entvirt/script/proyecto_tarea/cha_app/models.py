@@ -15,7 +15,7 @@ class Vendedor(models.Model):
     estado = models.BooleanField(default=True)
 
     def __str__(self):
-        return "{} {}".format(self.nombres, self.apellidos)
+        return "{}{}".format(self.nombres, self.apellidos)
 
     def save(self):
         self.nombres = self.nombres.upper()
@@ -99,7 +99,7 @@ class ContratoPoliza(models.Model):
         verbose_name_plural = "Contratos"
 
     def __str__(self):
-        return "{} - {}{}".format(self.id_poliza.descripcion, self.id_asegurado.nombres, self.id_asegurado.apellidos)
+        return "{} - {} {}".format(self.id_poliza.descripcion, self.id_asegurado.nombres, self.id_asegurado.apellidos)
 
 
 class Doctor(models.Model):
