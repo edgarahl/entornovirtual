@@ -15,7 +15,7 @@ class Vendedor(models.Model):
     estado = models.BooleanField(default=True)
 
     def __str__(self):
-        return "{}{}".format(self.nombres, self.apellidos)
+        return "{} {}".format(self.nombres, self.apellidos)
 
     def save(self):
         self.nombres = self.nombres.upper()
