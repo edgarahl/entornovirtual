@@ -5,7 +5,7 @@ from django.template import Context
 from django.template.loader import get_template
 from django.utils import timezone
 from xhtml2pdf import pisa
-from .models import Vendedor
+from .models import Vendedor, ContratoPoliza
 
 
 def link_callback(uri, rel):
@@ -36,16 +36,36 @@ def link_callback(uri, rel):
 
 
 def reporte_vendedores(request):
-    template_path='cha_app/vendedores_print_all.html'
+    template_path = 'cha_app/vendedores_print_all.html'
     today = timezone.now()
     vendedor = Vendedor.objects.all()
     context = {
-                'obj':vendedor,
-                'today':today,
-                'request':request
-               }
+        'obj': vendedor,
+        'today': today,
+        'request': request
+    }
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="vendedores.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+    pisaStatus = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    if pisaStatus.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
+def reporte_contrato(request):
+    template_path = 'cha_app/vendedores_print_all.html'
+    today = timezone.now()
+    contratoPoliza = ContratoPoliza.objects.all()
+    context = {
+        'obj': contratoPoliza,
+        'today': today,
+        'request': request
+    }
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="contrato_de_poliza.pdf"'
     template = get_template(template_path)
     html = template.render(context)
     pisaStatus = pisa.CreatePDF(
