@@ -23,7 +23,8 @@ from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar
     DoctorNuevo, DoctorBorrar, DoctorEditar, DoctorListar, FamiliaresBorrar, FamiliaresEditar, FamiliaresListar, \
     FamiliaresNuevo, HospitalizacionNuevo, HospitalizacionBorrar, HospitalizacionListar, HospitalizacionEditar, \
     TratamientoNuevo, TratamientoBorrar, TratamientoEditar, TratamientoListar, DetalleTratamientoNuevo, \
-    DetalleTratamientoBorrar, DetalleTratamientoEditar, DetalleTratamientoListar, AseguradoFamiliarLista
+    DetalleTratamientoBorrar, DetalleTratamientoEditar, DetalleTratamientoListar, AseguradoFamiliarLista, ContratoPolizaEditar, \
+    ContratoPolizaBorrar
 from .reportes import reporte_vendedores
 
 urlpatterns = [
@@ -56,6 +57,8 @@ urlpatterns = [
     # path("login/", auth_views.LoginView.as_view(template_name='cha_app/login.html'), name="login"),
     path("contratos/", ContratoPolizaListar.as_view(), name="contrato_listar"),
     path("contratos/nuevo/", ContratoPoliza.as_view(), name="contrato_nuevo"),
+    path("contratos/editar/<int:pk>", ContratoPolizaEditar.as_view(), name="contrato_editar"),
+    path("contratos/borrar/<int:pk>", ContratoPolizaBorrar.as_view(), name="contrato_borrar"),
 
     path("doctor/nuevo/", DoctorNuevo.as_view(), name="doctor_nuevo"),
     path("doctor/editar/<int:pk>", DoctorEditar.as_view(), name="doctor_editar"),
