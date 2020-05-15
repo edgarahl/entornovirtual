@@ -225,6 +225,24 @@ class ContratoPolizaListar(ClaseBase, generic.ListView):
     permission_required = "cha_app.view_contratopoliza"
 
 
+class ContratoPolizaEditar(generic.UpdateView):
+    model = Contratos
+    template_name = 'cha_app/contrato_form.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = ContratoPolizaForm
+    success_url = reverse_lazy('cha_app:contrato_listar')
+    permission_required = "cha_app.change_contratopoliza"
+
+
+class ContratoPolizaBorrar(generic.DeleteView):
+    model = Contratos
+    template_name = 'cha_app/contrato_borrar.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    form_class = ContratoPolizaForm
+    success_url = reverse_lazy('cha_app:contrato_listar')
+    permission_required = "cha_app.delete_contratopoliza"
+
+
 class DoctorNuevo(generic.CreateView):
     model = Doctor
     template_name = 'cha_app/doctor_form.html'
@@ -283,6 +301,7 @@ class FamiliaresBorrar(generic.DeleteView):
     form_class = FamiliaresForm
     success_url = reverse_lazy('cha_app:familiares_listar')
 
+
 class AseguradoFamiliarLista(ClaseBase, generic.ListView):
     model = Asegurado
     template_name = 'cha_app/asegurados_familiares_list.html'
@@ -303,8 +322,6 @@ class FamiliaresListar(generic.ListView):
         detalleFamiliares = Familiares.objects.filter(asegurado_id=id).all()
         context['obj'] = detalleFamiliares
         return context
-
-
 
 
 class HospitalizacionNuevo(generic.CreateView):
@@ -406,6 +423,7 @@ class DetalleTratamientoListar(generic.ListView):
     model = DetalleTratamiento
     template_name = 'cha_app/detalletratamiento_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
+
     # queryset = Book.objects.filter(title__icontains='war')[:5]
 
     def get_context_data(self, **kwargs):
@@ -416,8 +434,6 @@ class DetalleTratamientoListar(generic.ListView):
         detalleTratamiento = DetalleTratamiento.objects.filter(hospitalizacion_id=id).all()
         context['obj'] = detalleTratamiento
         return context
-
-
 
 
 """para el funcionamiento del Login
