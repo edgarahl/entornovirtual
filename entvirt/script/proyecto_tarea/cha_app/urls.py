@@ -25,7 +25,7 @@ from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar
     TratamientoNuevo, TratamientoBorrar, TratamientoEditar, TratamientoListar, DetalleTratamientoNuevo, \
     DetalleTratamientoBorrar, DetalleTratamientoEditar, DetalleTratamientoListar, AseguradoFamiliarLista, ContratoPolizaEditar, \
     ContratoPolizaBorrar
-from .reportes import reporte_vendedores
+from .reportes import reporte_vendedores, reporte_contrato
 
 urlpatterns = [
     path('home', home, name='home'),
@@ -72,6 +72,7 @@ urlpatterns = [
     path("familiares/listar/<int:id>", FamiliaresListar.as_view(), name="familiares_asegurado_listar"),
 
     path("reportes/vendedores/", reporte_vendedores, name='vendedores_print_all'),
+    path("reportes/contratos/<int:id>", reporte_contrato, name='contrato_print'),
 
     path("hospitalizaciones/nuevo/", HospitalizacionNuevo.as_view(), name="hospitalizaciones_nuevo"),
     path("hospitalizaciones/editar/<int:pk>", HospitalizacionEditar.as_view(), name="hospitalizaciones_editar"),
