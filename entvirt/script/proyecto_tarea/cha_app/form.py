@@ -68,7 +68,7 @@ class DoctorForm(forms.ModelForm):
 class FamiliaresForm(forms.ModelForm):
     class Meta:
         model = Familiares
-        fields = ['asegurado', 'fecha_nacimiento', 'nombres', 'apellidos']
+        fields = ['nombres', 'apellidos','fecha_nacimiento']
         lables = {'asegurado': 'Nombres', 'Fecha_nacimiento': 'fecha_nacimiento', 'Apellidos': 'apellidos'}
         widgets = {
             'fecha_nacimiento': forms.DateInput(format=('%Y-%m-%d'),

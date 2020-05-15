@@ -15,7 +15,7 @@ class Vendedor(models.Model):
     estado = models.BooleanField(default=True)
 
     def __str__(self):
-        return "{}{}".format(self.nombres, self.apellidos)
+        return "{} {}".format(self.nombres, self.apellidos)
 
     def save(self):
         self.nombres = self.nombres.upper()
@@ -127,9 +127,6 @@ class Doctor(models.Model):
 
 class Familiares(models.Model):
     asegurado = models.ForeignKey('Asegurado', on_delete=models.CASCADE, null=False)
-    fecha_nacimiento = models.DateField(null=False, blank=False)
-    estado = models.BooleanField(default=True)
-
     nombres = models.CharField(
         max_length=100,
         blank=True,
@@ -140,6 +137,8 @@ class Familiares(models.Model):
         blank=True,
         null=True
     )
+    fecha_nacimiento = models.DateField(null=False, blank=False)
+    estado = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["asegurado"]

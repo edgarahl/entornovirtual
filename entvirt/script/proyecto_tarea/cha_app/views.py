@@ -102,7 +102,7 @@ class VendedorBorrar(ClaseBase, generic.DeleteView):
     template_name = 'cha_app/vendedor_borrar.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = VendedorForm
-    success_url = reverse_lazy('cha_app:vendedor_borrar')
+    success_url = reverse_lazy('cha_app:vendedor_listar')
     permission_required = "cha_app.delete_vendedor"
 
 
@@ -262,6 +262,11 @@ class FamiliaresNuevo(generic.CreateView):
     form_class = FamiliaresForm
     success_url = reverse_lazy('cha_app:familiares_listar')
 
+    def form_valid(self, form):
+        form.instance.asegurado_id = self.kwargs.get('id')
+        form.save()
+        return HttpResponseRedirect(reverse_lazy('cha_app:familiares_listar'))
+
 
 class FamiliaresEditar(generic.UpdateView):
     model = Familiares
@@ -278,11 +283,28 @@ class FamiliaresBorrar(generic.DeleteView):
     form_class = FamiliaresForm
     success_url = reverse_lazy('cha_app:familiares_listar')
 
+class AseguradoFamiliarLista(ClaseBase, generic.ListView):
+    model = Asegurado
+    template_name = 'cha_app/asegurados_familiares_list.html'
+    context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    permission_required = "cha_app.view_asegurado"
+
 
 class FamiliaresListar(generic.ListView):
     model = Familiares
     template_name = 'cha_app/familiares_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        id = self.kwargs.get('id')
+        # Get the blog from id and add it to the context
+        detalleFamiliares = Familiares.objects.filter(asegurado_id=id).all()
+        context['obj'] = detalleFamiliares
+        return context
+
+
 
 
 class HospitalizacionNuevo(generic.CreateView):
@@ -369,7 +391,7 @@ class DetalleTratamientoEditar(generic.UpdateView):
     template_name = 'cha_app/detalletratamiento_form.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = DetalleTratamientoForm
-    success_url = reverse_lazy('cha_app:detalletratamiento_listar')
+    success_url = reverse_lazy('cha_app:hospitalizaciones_listar')
 
 
 class DetalleTratamientoBorrar(generic.DeleteView):
@@ -377,13 +399,25 @@ class DetalleTratamientoBorrar(generic.DeleteView):
     template_name = 'cha_app/detalletratamiento_borrar.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
     form_class = DetalleTratamientoForm
-    success_url = reverse_lazy('cha_app:detalletratamiento_list')
+    success_url = reverse_lazy('cha_app:hospitalizaciones_listar')
 
 
 class DetalleTratamientoListar(generic.ListView):
     model = DetalleTratamiento
     template_name = 'cha_app/detalletratamiento_list.html'
     context_object_name = 'obj'  # es el nombre del objeto de la consulta
+    # queryset = Book.objects.filter(title__icontains='war')[:5]
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        id = self.kwargs.get('id')
+        # Get the blog from id and add it to the context
+        detalleTratamiento = DetalleTratamiento.objects.filter(hospitalizacion_id=id).all()
+        context['obj'] = detalleTratamiento
+        return context
+
+
 
 
 """para el funcionamiento del Login

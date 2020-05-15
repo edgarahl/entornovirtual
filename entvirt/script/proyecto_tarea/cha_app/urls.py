@@ -23,7 +23,7 @@ from .views import VendedorListar, VendedorNueva, VendedorBorrar, VendedorEditar
     DoctorNuevo, DoctorBorrar, DoctorEditar, DoctorListar, FamiliaresBorrar, FamiliaresEditar, FamiliaresListar, \
     FamiliaresNuevo, HospitalizacionNuevo, HospitalizacionBorrar, HospitalizacionListar, HospitalizacionEditar, \
     TratamientoNuevo, TratamientoBorrar, TratamientoEditar, TratamientoListar, DetalleTratamientoNuevo, \
-    DetalleTratamientoBorrar, DetalleTratamientoEditar, DetalleTratamientoListar
+    DetalleTratamientoBorrar, DetalleTratamientoEditar, DetalleTratamientoListar, AseguradoFamiliarLista
 from .reportes import reporte_vendedores
 
 urlpatterns = [
@@ -62,10 +62,11 @@ urlpatterns = [
     path("doctor/borrar/<int:pk>", DoctorBorrar.as_view(), name="doctor_borrar"),
     path("doctor/", DoctorListar.as_view(), name="doctor_listar"),
 
-    path("familiares/nuevo/", FamiliaresNuevo.as_view(), name="familiares_nuevo"),
+    path("familiares/nuevo/<int:id>", FamiliaresNuevo.as_view(), name="familiares_nuevo"),
     path("familiares/editar/<int:pk>", FamiliaresEditar.as_view(), name="familiares_editar"),
     path("familiares/borrar/<int:pk>", FamiliaresBorrar.as_view(), name="familiares_borrar"),
-    path("familiares/", FamiliaresListar.as_view(), name="familiares_listar"),
+    path("familiares/", AseguradoFamiliarLista.as_view(), name="familiares_listar"),
+    path("familiares/listar/<int:id>", FamiliaresListar.as_view(), name="familiares_asegurado_listar"),
 
     path("reportes/vendedores/", reporte_vendedores, name='vendedores_print_all'),
 
@@ -83,5 +84,5 @@ urlpatterns = [
     path("detalletratamientos/nuevo/<int:id>", DetalleTratamientoNuevo.as_view(), name="detalletratamiento_nuevo"),
     path("detalletratamientos/editar/<int:pk>", DetalleTratamientoEditar.as_view(), name="detalletratamiento_editar"),
     path("detalletratamientos/borrar/<int:pk>", DetalleTratamientoBorrar.as_view(), name="detalletratamiento_borrar"),
-    path("detalletratamientos/", DetalleTratamientoListar.as_view(), name="detalletratamiento_listar"),
+    path("detalletratamientos/listar/<int:id>", DetalleTratamientoListar.as_view(), name="detalletratamiento_listar"),
 ]
