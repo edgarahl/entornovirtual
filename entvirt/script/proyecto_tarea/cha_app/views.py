@@ -1,7 +1,9 @@
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.utils.datetime_safe import datetime
 from django.views import generic
 from .models import Vendedor, Poliza, Asegurado, Hospital, ContratoPoliza as Contratos, Doctor, Familiares, \
     Hospitalizacion, Tratamiento, DetalleTratamiento
@@ -398,8 +400,16 @@ class DetalleTratamientoNuevo(generic.CreateView):
         return content
 
     def form_valid(self, form):
-        form.instance.hospitalizacion_id = self.kwargs.get('id')
-        form.save()
+        id = self.kwargs.get('id')
+        hospitalizacion = Hospitalizacion.objects.filter(id=id).first()
+        fecha_tratamiento = self.request.POST['fecha']
+        fecha_tratamiento = datetime.strptime(fecha_tratamiento, '%Y-%m-%d')
+        fecha_ingreso = hospitalizacion.fecha_entrada
+        if fecha_tratamiento.date() < fecha_ingreso:
+            pass
+        else:
+            form.instance.hospitalizacion_id = self.kwargs.get('id')
+            form.save()
         return HttpResponseRedirect(reverse_lazy('cha_app:hospitalizaciones_listar'))
 
 
