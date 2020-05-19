@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+
 from .models import Vendedor, Poliza, Hospital, Asegurado, ContratoPoliza, Doctor, Familiares, Hospitalizacion, \
     Tratamiento, DetalleTratamiento
 
@@ -64,6 +66,12 @@ class DoctorForm(forms.ModelForm):
         lables = {'nombres': 'Nombre', 'apellidos': 'Apellidos',
                   'estado': 'Estado'}
 
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for field in iter(self.fields):
+                self.fields[field].widget.attrs.update({'class':'form-control'})
+
+
 
 class FamiliaresForm(forms.ModelForm):
     class Meta:
@@ -110,3 +118,9 @@ class DetalleTratamientoForm(forms.ModelForm):
                                              attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
                                                     'type': 'date'})
         }
+
+    def clean_costo(self):
+        costo = self.cleaned_data['costo']
+        if costo == 0:
+           raise ValidationError('El costo no puede ser 0')
+        return costo
