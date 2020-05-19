@@ -18,6 +18,21 @@ class PolizaForm(forms.ModelForm):
         fields = ['descripcion', 'costo', 'costo_extension', 'valor_cobertura']
         lables = {'descripcion': 'Descripcion', 'costo': 'Costo', 'costo_extension': 'Costo de Extension'}
 
+    def clean_valor_cobertura(self):
+        v_cobertura = self.cleaned_data['valor_cobertura']
+        costo = self.cleaned_data['costo']
+
+        if costo > v_cobertura:
+            raise ValidationError('El costo no puede ser mayor al valor de cobertura')
+        return v_cobertura
+
+    def clean_costo_extension(self):
+        costo_e = self.cleaned_data['costo_extension']
+        v_costo = self.cleaned_data['costo']
+        if costo_e > v_costo:
+            raise ValidationError('El costo de la extension debe ser menor al costo de la poliza')
+        return costo_e
+
 
 class HospitalForm(forms.ModelForm):
     class Meta:
@@ -124,3 +139,4 @@ class DetalleTratamientoForm(forms.ModelForm):
         if costo == 0:
            raise ValidationError('El costo no puede ser 0')
         return costo
+
