@@ -11,6 +11,11 @@ class VendedorForm(forms.ModelForm):
         fields = ['nombres', 'apellidos', 'estado']
         lables = {'nombres': 'Nombre', 'apellidos': 'Apellidos'}
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({'class':'form-control'})
+
 
 class PolizaForm(forms.ModelForm):
     class Meta:
@@ -18,12 +23,18 @@ class PolizaForm(forms.ModelForm):
         fields = ['descripcion', 'costo', 'costo_extension', 'valor_cobertura']
         lables = {'descripcion': 'Descripcion', 'costo': 'Costo', 'costo_extension': 'Costo de Extension'}
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({'class':'form-control'})
+
+
     def clean_valor_cobertura(self):
         v_cobertura = self.cleaned_data['valor_cobertura']
         costo = self.cleaned_data['costo']
 
         if costo > v_cobertura:
-            raise ValidationError('El costo no puede ser mayor al valor de cobertura')
+            raise ValidationError('Emily, El costo no puede ser mayor al valor de cobertura')
         return v_cobertura
 
     def clean_costo_extension(self):
@@ -39,6 +50,11 @@ class HospitalForm(forms.ModelForm):
         model = Hospital
         fields = ['descripcion', 'direccion', 'estado']
         lables = {'descripcion': 'Descripcion', 'direccion': 'Direccion', 'estado': 'Estado'}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({'class':'form-control'})
 
 
 class AseguradoForm(forms.ModelForm):
