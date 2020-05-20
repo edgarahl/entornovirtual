@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
