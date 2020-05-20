@@ -3,10 +3,29 @@
 {% block contenido %}
 <br>
 <form method="post">{% csrf_token %}
-<div class="card border-primary mb-3" style="max-width: 20rem;">
+<div class="card border-primary mb-3" style="max-width: 30rem;">
     <div class="card-header">Agregar Hospital</div>
     <div class="card-body">
-        {{ form.as_p }}
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Descripcion</label>
+            </div>
+            <div class="col-lg-9">
+                {{ form.descripcion }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <label>Direccion</label>
+            </div>
+            <div class="col-lg-9">
+                {{ form.direccion }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"><label>Estado</label></div>
+            <div class="col-lg-9">{{ form.estado }}</div>
+        </div>
     </div>
     <div class="card-footer">
         <button type="submit" class="btn btn-success" >Guardar</button>
