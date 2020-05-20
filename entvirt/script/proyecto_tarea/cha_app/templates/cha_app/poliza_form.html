@@ -11,7 +11,7 @@
                     Descripcion:
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <input type="text" name="descripcion" maxlength="100" required="" id="id_descripcion" class="form-control" value="">
+                    {{ form.descripcion }}
                 </div>
             </div>
             <div class="row">
@@ -19,7 +19,7 @@
                     Costo:
                 </div>
                 <div class="col-lg-6 col-md-6">
-                   <input type="number" name="costo" value="0" step="any" required="" id="id_costo" class="form-control">
+                   {{ form.costo }}
                 </div>
             </div>
             <div class="row">
@@ -27,7 +27,7 @@
                     Costo x Extension:
                 </div>
                 <div class="col-lg-6 col-md-6">
-                   <input type="number" name="costo_extension" value="0" step="any" required="" id="id_costo_extension" class="form-control">
+                   {{form.costo_extension}}
                 </div>
             </div>
             <div class="row">
@@ -35,7 +35,15 @@
                     Valor de la Cobertura:
                 </div>
                 <div class="col-lg-6 col-md-6">
-                    <input type="number" name="valor_cobertura" value="0" step="any" required="" id="id_valor_cobertura" class="form-control">
+                    {{ form.valor_cobertura }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    Estado:
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    {{ form.estado }}
                 </div>
             </div>
 
