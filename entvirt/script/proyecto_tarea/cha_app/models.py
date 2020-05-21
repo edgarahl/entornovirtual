@@ -141,7 +141,7 @@ class Familiares(models.Model):
     estado = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ["asegurado"]
+        ordering = ["nombres"]
         verbose_name_plural = "Asegurados"
 
     def __str__(self):
