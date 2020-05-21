@@ -14,7 +14,7 @@ class VendedorForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({'class':'form-control'})
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
 
 
 class PolizaForm(forms.ModelForm):
@@ -26,8 +26,7 @@ class PolizaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({'class':'form-control'})
-
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
 
     def clean_valor_cobertura(self):
         v_cobertura = self.cleaned_data['valor_cobertura']
@@ -54,7 +53,7 @@ class HospitalForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({'class':'form-control'})
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
 
 
 class AseguradoForm(forms.ModelForm):
@@ -100,14 +99,13 @@ class DoctorForm(forms.ModelForm):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
             for field in iter(self.fields):
-                self.fields[field].widget.attrs.update({'class':'form-control'})
-
+                self.fields[field].widget.attrs.update({'class': 'form-control'})
 
 
 class FamiliaresForm(forms.ModelForm):
     class Meta:
         model = Familiares
-        fields = ['nombres', 'apellidos','fecha_nacimiento']
+        fields = ['nombres', 'apellidos', 'fecha_nacimiento']
         lables = {'asegurado': 'Nombres', 'Fecha_nacimiento': 'fecha_nacimiento', 'Apellidos': 'apellidos'}
         widgets = {
             'fecha_nacimiento': forms.DateInput(format=('%Y-%m-%d'),
@@ -143,16 +141,15 @@ class DetalleTratamientoForm(forms.ModelForm):
     class Meta:
         model = DetalleTratamiento
         fields = ['tratamiento', 'descripcion', 'fecha', 'costo', 'estado']
-        labels = {'tratamiento':'Tratamiento','fecha':'Fecha','costo':'Costo','estado':'Estado'}
+        labels = {'tratamiento': 'Tratamiento', 'fecha': 'Fecha', 'costo': 'Costo', 'estado': 'Estado'}
         widgets = {
             'fecha': forms.DateInput(format=('%Y-%m-%d'),
-                                             attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
-                                                    'type': 'date'})
+                                     attrs={'class': 'form-control', 'placeholder': 'Seleccione una fecha',
+                                            'type': 'date'})
         }
 
     def clean_costo(self):
         costo = self.cleaned_data['costo']
         if costo == 0:
-           raise ValidationError('El costo no puede ser 0')
+            raise ValidationError('El costo no puede ser 0')
         return costo
-
