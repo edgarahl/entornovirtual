@@ -321,7 +321,10 @@ class FamiliaresListar(generic.ListView):
         id = self.kwargs.get('id')
         # Get the blog from id and add it to the context
         detalleFamiliares = Familiares.objects.filter(asegurado_id=id).all()
+        dataAsegurado = Asegurado.objects.filter(id=id).first()
         context['obj'] = detalleFamiliares
+        context['id_ase'] = id
+        context['dataAsegurado'] = dataAsegurado
         return context
 
 
